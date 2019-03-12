@@ -16,7 +16,7 @@ public class ProcesosSecundarios {
         String resultado = texto;
         for (int i = 0; i < capturas.size(); i++) {
             int indice = i * 25;
-            resultado = resultado.substring(0, (capturas.get(i) + indice)) + "<font color=\"red\">" + cadena + "</font>" + resultado.substring((capturas.get(i) + indice + 2));
+            resultado = resultado.substring(0, (capturas.get(i) + indice)) + "<font color=\"red\">" + cadena + "</font>" + resultado.substring((capturas.get(i) + indice + cadena.length()));
         }
         return resultado;
     }

@@ -51,25 +51,20 @@ public class AlgortimoBM {
     public ArrayList<Integer> realizarBusqueda() {
         int CadenaRecorrido = getCadena().length() - 1;
         int TextoRecorrido = getCadena().length() - 1;
-        System.out.println("El recorrido empieza con " + getCadena().length());
         ArrayList<Item> ListaD1 = obtenerListaD1();
 
         while (TextoRecorrido < getTexto().length()) {
-            System.out.println("Comparación máxima: " + getCadena().charAt(CadenaRecorrido) + " en " + CadenaRecorrido + ", " + getTexto().charAt(TextoRecorrido) + " en " + TextoRecorrido);
             if (getCadena().charAt(CadenaRecorrido) == getTexto().charAt(TextoRecorrido)) {
-                System.out.println("El caracter es igual en " + CadenaRecorrido + " y " + TextoRecorrido);
                 //Recorre la cadena en busca de un carácter diferente
                 for (int j = 0; j < getCadena().length() - 1; j++) {
                     CadenaRecorrido--;
                     TextoRecorrido--;
-                    System.out.println("Se comparan: " + getCadena().charAt(CadenaRecorrido) + " con " + getTexto().charAt(TextoRecorrido));
                     if (getCadena().charAt(CadenaRecorrido) != getTexto().charAt(TextoRecorrido)) {
                         Boolean visto = false;
                         for (int k = 1; k < ListaD1.size(); k++) {
                             if (ListaD1.get(k).Caracter == getTexto().charAt(TextoRecorrido)) {
                                 visto = true;
                                 TextoRecorrido = TextoRecorrido + ListaD1.get(k).Posicion;
-                                System.out.println(TextoRecorrido);
                                 break;
                             }
                         }
@@ -79,20 +74,14 @@ public class AlgortimoBM {
                         CadenaRecorrido = getCadena().length() - 1;
                         break;
                     } else if (j == getCadena().length() - 2) {
-                        System.out.println("Se encontró en " + TextoRecorrido);
                         posiciones.add(TextoRecorrido);
                         TextoRecorrido = TextoRecorrido + (getCadena().length() - 1) + getCadena().length();
                         CadenaRecorrido = getCadena().length() - 1;
-                        System.out.println("Texto recorrido: " + TextoRecorrido);
-                        System.out.println("Cadena recorrido: " + CadenaRecorrido);
-
                     }
-
                 }
             } else {
                 Boolean visto = false;
                 for (int j = 1; j < ListaD1.size(); j++) {
-                    System.out.println(ListaD1.get(j).Caracter + ", " + getTexto().charAt(TextoRecorrido));
                     if (ListaD1.get(j).Caracter == getTexto().charAt(TextoRecorrido)) {
                         visto = true;
                         TextoRecorrido = TextoRecorrido + ListaD1.get(j).Posicion;

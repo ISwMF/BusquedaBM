@@ -96,7 +96,6 @@ public class Mostrador {
     JEditorPane editor = new JEditorPane();
 
     public void mostrarResultado(String texto) {
-        System.out.println(texto);
         texto = "<b>" + texto + "</b>";
         editor.setContentType("text/html");
         editor.setText(texto);
