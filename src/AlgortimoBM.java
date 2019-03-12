@@ -48,15 +48,16 @@ public class AlgortimoBM {
         }
     }
 
-    public void realizarBusqueda() {
+    public ArrayList<Integer> realizarBusqueda() {
         int CadenaRecorrido = getCadena().length() - 1;
         int TextoRecorrido = getCadena().length() - 1;
+        System.out.println("El recorrido empieza con " + getCadena().length());
         ArrayList<Item> ListaD1 = obtenerListaD1();
-        
+
         while (TextoRecorrido < getTexto().length()) {
             System.out.println("Comparación máxima: " + getCadena().charAt(CadenaRecorrido) + " en " + CadenaRecorrido + ", " + getTexto().charAt(TextoRecorrido) + " en " + TextoRecorrido);
             if (getCadena().charAt(CadenaRecorrido) == getTexto().charAt(TextoRecorrido)) {
-
+                System.out.println("El caracter es igual en " + CadenaRecorrido + " y " + TextoRecorrido);
                 //Recorre la cadena en busca de un carácter diferente
                 for (int j = 0; j < getCadena().length() - 1; j++) {
                     CadenaRecorrido--;
@@ -81,19 +82,20 @@ public class AlgortimoBM {
                         System.out.println("Se encontró en " + TextoRecorrido);
                         posiciones.add(TextoRecorrido);
                         TextoRecorrido = TextoRecorrido + (getCadena().length() - 1) + getCadena().length();
-                        CadenaRecorrido = getCadena().length();
+                        CadenaRecorrido = getCadena().length() - 1;
+                        System.out.println("Texto recorrido: " + TextoRecorrido);
+                        System.out.println("Cadena recorrido: " + CadenaRecorrido);
+
                     }
 
                 }
             } else {
                 Boolean visto = false;
                 for (int j = 1; j < ListaD1.size(); j++) {
-                    System.out.println(ListaD1.get(j).Caracter);
-                    System.out.println(getTexto().charAt(TextoRecorrido));
-                    System.out.println("---");
+                    System.out.println(ListaD1.get(j).Caracter + ", " + getTexto().charAt(TextoRecorrido));
                     if (ListaD1.get(j).Caracter == getTexto().charAt(TextoRecorrido)) {
                         visto = true;
-                        TextoRecorrido = TextoRecorrido + ListaD1.get(TextoRecorrido).Posicion;
+                        TextoRecorrido = TextoRecorrido + ListaD1.get(j).Posicion;
                         break;
                     }
                 }
@@ -102,6 +104,7 @@ public class AlgortimoBM {
                 }
             }
         }
+        return posiciones;
     }
 
     public ArrayList<Item> obtenerListaD1() {
@@ -120,8 +123,8 @@ public class AlgortimoBM {
                 Caracteres.add(new Item(getCadena().charAt(i), (getCadena().length() - i - 1)));
             }
         }
-        imprimirListaD1(Caracteres);
         Caracteres.add(new Item('-', getCadena().length()));
+        imprimirListaD1(Caracteres);
         return Caracteres;
     }
 
