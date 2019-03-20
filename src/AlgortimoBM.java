@@ -113,7 +113,6 @@ public class AlgortimoBM {
             }
         }
         Caracteres.add(new Item('-', getCadena().length()));
-        imprimirListaD1(Caracteres);
         return Caracteres;
     }
 

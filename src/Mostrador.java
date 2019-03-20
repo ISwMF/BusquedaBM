@@ -34,20 +34,21 @@ public class Mostrador {
         JScrollPane scrollPane = new JScrollPane(texto, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         texto.setEditable(true);
 
-        JPanel Botones = new JPanel(new GridLayout(0, 3));
+        JPanel Botones = new JPanel(new GridLayout(0, 4));
         JButton button1 = new JButton("Buscar");
         button1.addActionListener((ActionEvent e) -> {
             editor.setText("");
+            editor2.setText("");
             String CadenaAEvaluar = cadena.getText();
             String TextoAevaluar = texto.getText();
             if (CadenaAEvaluar.equals("") || CadenaAEvaluar.length() == 1 || TextoAevaluar.equals("") || TextoAevaluar.length() == 1) {
-
                 JOptionPane.showMessageDialog(null, "La cadena no es válida");
             } else {
                 AlgortimoBM ABM = new AlgortimoBM(CadenaAEvaluar, TextoAevaluar);
                 ArrayList<Integer> posiciones = ABM.realizarBusqueda();
                 ProcesosSecundarios PS = new ProcesosSecundarios();
                 mostrarResultado(PS.caracterizarTexto(TextoAevaluar, CadenaAEvaluar, posiciones));
+                mostrarCantidadDePalabras(posiciones.size());
                 cadena.setForeground(Color.red);
             }
         });
@@ -77,15 +78,36 @@ public class Mostrador {
                 mostrarResultado(A.invertirCadaPalabraDeUnTexto(TextoAevaluar));
             }
         });
+
+        JButton button4 = new JButton("\"Palindroma\"");
+        button4.addActionListener((ActionEvent e) -> {
+            editor.setText("");
+            editor2.setText("");
+            String CadenaAEvaluar = cadena.getText();
+            String TextoAevaluar = texto.getText();
+            if (CadenaAEvaluar.equals("") || CadenaAEvaluar.length() == 1 || TextoAevaluar.equals("") || TextoAevaluar.length() == 1) {
+                JOptionPane.showMessageDialog(null, "La cadena no es válida");
+            } else {
+                ProcesosSecundarios PS = new ProcesosSecundarios();
+                CadenaAEvaluar = PS.invertirTexto(CadenaAEvaluar);
+                AlgortimoBM ABM = new AlgortimoBM(CadenaAEvaluar, TextoAevaluar);
+                ArrayList<Integer> posiciones = ABM.realizarBusqueda();
+                mostrarResultado(PS.caracterizarTexto(TextoAevaluar, CadenaAEvaluar, posiciones));
+                mostrarCantidadDePalabras(posiciones.size());
+                cadena.setForeground(Color.blue);
+            }
+        });
+
         Botones.add(button1);
         Botones.add(button2);
         Botones.add(button3);
+        Botones.add(button4);
 
         PanelGeneral.add(Buscador, BorderLayout.NORTH);
         PanelGeneral.add(scrollPane, BorderLayout.CENTER);
         PanelGeneral.add(Botones, BorderLayout.SOUTH);
         VentanaGeneral.add(PanelGeneral);
-        VentanaGeneral.setBounds(10, 10, 375, 159);
+        VentanaGeneral.setBounds(10, 10, 600, 159);
         VentanaGeneral.setBackground(Color.red);
         VentanaGeneral.setLocationRelativeTo(null);
         VentanaGeneral.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -94,6 +116,9 @@ public class Mostrador {
 
     JFrame VentanaResultado = new JFrame();
     JEditorPane editor = new JEditorPane();
+
+    JFrame VentanaNumeros = new JFrame();
+    JEditorPane editor2 = new JEditorPane();
 
     public void mostrarResultado(String texto) {
         texto = "<b>" + texto + "</b>";
@@ -105,6 +130,15 @@ public class Mostrador {
         VentanaResultado.setLocationRelativeTo(null);
         VentanaResultado.setVisible(true);
 
+    }
+
+    public void mostrarCantidadDePalabras(int num) {
+        editor2.setText("La cantidad de palabras que aparece en el texto es de " + num);
+        VentanaNumeros.add(editor2);
+        VentanaNumeros.setBounds(10, 10, 375, 159);
+        VentanaNumeros.setBackground(Color.red);
+        VentanaNumeros.setLocationRelativeTo(null);
+        VentanaNumeros.setVisible(true);
     }
 
 }
