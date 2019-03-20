@@ -54,15 +54,15 @@ public class AlgortimoBM {
         ArrayList<Item> ListaD1 = obtenerListaD1();
 
         while (TextoRecorrido < getTexto().length()) {
-            if (getCadena().charAt(CadenaRecorrido) == getTexto().charAt(TextoRecorrido)) {
+            if (Character.toLowerCase(getCadena().charAt(CadenaRecorrido)) == Character.toLowerCase(getTexto().charAt(TextoRecorrido))) {
                 //Recorre la cadena en busca de un carácter diferente
                 for (int j = 0; j < getCadena().length() - 1; j++) {
                     CadenaRecorrido--;
                     TextoRecorrido--;
-                    if (getCadena().charAt(CadenaRecorrido) != getTexto().charAt(TextoRecorrido)) {
+                    if (Character.toLowerCase(getCadena().charAt(CadenaRecorrido)) != Character.toLowerCase(getTexto().charAt(TextoRecorrido))) {
                         Boolean visto = false;
                         for (int k = 1; k < ListaD1.size(); k++) {
-                            if (ListaD1.get(k).Caracter == getTexto().charAt(TextoRecorrido)) {
+                            if (Character.toLowerCase(ListaD1.get(k).Caracter) == Character.toLowerCase(getTexto().charAt(TextoRecorrido))) {
                                 visto = true;
                                 TextoRecorrido = TextoRecorrido + ListaD1.get(k).Posicion;
                                 break;
@@ -82,7 +82,7 @@ public class AlgortimoBM {
             } else {
                 Boolean visto = false;
                 for (int j = 1; j < ListaD1.size(); j++) {
-                    if (ListaD1.get(j).Caracter == getTexto().charAt(TextoRecorrido)) {
+                    if (Character.toLowerCase(ListaD1.get(j).Caracter) == Character.toLowerCase(getTexto().charAt(TextoRecorrido))) {
                         visto = true;
                         TextoRecorrido = TextoRecorrido + ListaD1.get(j).Posicion;
                         break;
