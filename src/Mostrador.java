@@ -46,6 +46,7 @@ public class Mostrador {
             } else {
                 AlgortimoBM ABM = new AlgortimoBM(CadenaAEvaluar, TextoAevaluar);
                 ArrayList<Integer> posiciones = ABM.realizarBusqueda();
+                System.out.println(posiciones);
                 ProcesosSecundarios PS = new ProcesosSecundarios();
                 mostrarResultado(PS.caracterizarTexto(TextoAevaluar, CadenaAEvaluar, posiciones));
                 mostrarCantidadDePalabras(posiciones.size());
@@ -89,10 +90,12 @@ public class Mostrador {
                 JOptionPane.showMessageDialog(null, "La cadena no es válida");
             } else {
                 ProcesosSecundarios PS = new ProcesosSecundarios();
-                CadenaAEvaluar = PS.invertirTexto(CadenaAEvaluar);
-                AlgortimoBM ABM = new AlgortimoBM(CadenaAEvaluar, TextoAevaluar);
+                String TextoCambiado = PS.quitarCaracteresEspecialesDeUnTexto(TextoAevaluar);
+                String PalabraCambiada = PS.invertirTexto(CadenaAEvaluar);
+                AlgortimoBM ABM = new AlgortimoBM(PalabraCambiada, TextoCambiado);
                 ArrayList<Integer> posiciones = ABM.realizarBusqueda();
-                mostrarResultado(PS.caracterizarTexto(TextoAevaluar, CadenaAEvaluar, posiciones));
+                System.out.println(posiciones);
+                mostrarResultado(PS.caracterizarTextoPalindromo(TextoAevaluar, CadenaAEvaluar, posiciones));
                 mostrarCantidadDePalabras(posiciones.size());
                 cadena.setForeground(Color.blue);
             }
